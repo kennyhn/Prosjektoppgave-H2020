@@ -11,27 +11,27 @@ g_z     = 9.81;
 
 %% Controller gains
 % Velocity controller gains
-lambda_u    = 1;
-phi_u       = 1;
-k_p_u       = 1;
-k_s_u       = 1;
+lambda_u    = 10;
+phi_u       = 5;
+k_p_u       = 2;
+k_s_u       = 3;
 
-lambda_v    = 1;
-phi_v       = 1;
-k_p_v       = 1;
-k_s_v       = 1;
+lambda_v    = 10;
+phi_v       = 5;
+k_p_v       = 2;
+k_s_v       = 3;
 
 % Depth controller gains
-lambda_z    = 1;
+lambda_z    = 10;
 phi_z       = 1;
 k_p_z       = 1; 
 k_s_z       = 1;
 
 % Heading controller gains
-lambda_psi  = 0.5;
-phi_psi     = deg2rad(5);
-k_p_psi     = 1;
-k_s_psi     = 1;
+lambda_psi  = 35;
+phi_psi     = deg2rad(10);
+k_p_psi     = 20;
+k_s_psi     = 25;
 
 %% Adaptive gains
 gamma_u     = 0.1;

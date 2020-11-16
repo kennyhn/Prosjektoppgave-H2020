@@ -12,13 +12,13 @@ g_z     = 9.81;
 %% Controller gains
 % Velocity controller gains
 k_p_u   = 10;
-k_i_u   = k_p_u/100;
+k_i_u   = k_p_u/10;
 k_p_v   = 10;
-k_i_v   = k_p_v/100;
+k_i_v   = k_p_v/10;
 
 % Depth controller gains
 zeta_d_heave = 1; % Critical damping
-wb_d_heave   = 0.03; % desired bandwidth on heave
+wb_d_heave   = 0.5; % desired bandwidth on heave
 wn_heave     = wb_d_heave/sqrt(1-2*zeta_d_heave^2+sqrt(4*zeta_d_heave^4-4*zeta_d_heave^2+2));
 
 k_p_z        = wn_heave^2*m_33; 
@@ -27,7 +27,7 @@ k_i_z        = wn_heave/10*k_p_z;
 % Heading controller gains
 % Might need to do a new analysis on this tuning
 zeta_d_psi   = 1; % Critical damping
-wb_d_psi     = 0.3; % desired bandwidth on heading
+wb_d_psi     = 0.7; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
 k_p_psi      = wn_psi^2*m_44;
