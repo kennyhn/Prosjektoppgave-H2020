@@ -1,6 +1,6 @@
 clc; close all;
 %% Create all constants
-constants_feedback_linearizing_model
+constants_model_coriolis
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -40,7 +40,7 @@ lambda       = 1;
 t_sim = 2500; %s
 
 %% Run simulation
-sim_output = sim('simulering_ROV_feedback_linearizing_second_try.slx');
+sim_output = sim('simulering_ROV_FL_controller.slx');
 
 %% Parse out results
 nu              = sim_output.nu.signals.values;
