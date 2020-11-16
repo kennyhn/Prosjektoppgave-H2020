@@ -100,7 +100,8 @@ B       = [b11 b12 b13 b14 b15 b16;
             b31 b32 b33 b34 b35 b36;
             b41 b42 b43 b44 b45 b46];
 
-
+B_psinv = B'/(B*B');
+        
 % Principle rotation matrix about z-axis
 R_z     = @(psi)([cos(psi) -sin(psi) 0 0;
                   sin(psi) cos(psi) 0 0;
