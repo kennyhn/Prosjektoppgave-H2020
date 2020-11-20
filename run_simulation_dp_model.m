@@ -11,8 +11,10 @@ g_z     = 9.81;
 
 %% Controller gains
 % Velocity controller gains
-k_p_u   = 3;
-k_p_v   = 3;
+pole_u      = 5; % place pole at -value. Tune here
+k_p_u       = pole_u-d_11/m_11;
+pole_v      = 5; % place pole at -value. Tune here
+k_p_v       = pole_v-d_22/m_22;
 
 % Depth controller gains
 zeta_d_heave = 1; % Critical damping
@@ -30,7 +32,7 @@ wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2
 
 k_p_psi      = wn_psi^2*m_44;
 k_d_psi      = 2*m_44*zeta_d_psi*wn_psi-d_44;
-
+k_i_psi      = 1/10*k_p_psi;
 %% Adaptive controller gains
 gamma1      = 0.5;
 gamma2      = 0.5;

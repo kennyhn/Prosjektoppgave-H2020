@@ -11,15 +11,17 @@ g_z     = 9.81;
 
 %% Controller gains
 % Velocity controller gains
-k_p_u       = 1;
+pole_u      = 5; % place pole at -value. Tune here
+k_p_u       = m_11*pole_u-d_11;
 gamma_u     = 0.1;
-k_p_v       = 1;
+pole_v      = 5; % place pole at -value. Tune here
+k_p_v       = m_22*pole_v-d_22;
 gamma_v     = 0.1;
 
 
 % Depth controller gains
 zeta_d_heave = 1; % Critical damping
-wb_d_heave   = 0.03; % desired bandwidth on heave
+wb_d_heave   = 1; % desired bandwidth on heave
 wn_heave     = wb_d_heave/sqrt(1-2*zeta_d_heave^2+sqrt(4*zeta_d_heave^4-4*zeta_d_heave^2+2));
 
 k_p_w        = wn_heave^2*m_33; 
@@ -27,17 +29,18 @@ k_d_w        = 2*m_33*zeta_d_heave*wn_heave-d_33;
 k_i_w        = wn_heave/10*k_p_w;
 
 % Heading controller gains
+lambda       = d_44; % tuning system damping must be greater than 0
 zeta_d_psi   = 1; % Critical damping
-wb_d_psi     = 0.3; % desired bandwidth on heading
+wb_d_psi     = 0.8; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
-k_p_psi      = wn_psi^2*m_44;
-k_p_r        = 2*m_44*zeta_d_psi*wn_psi-d_44;
+k_p_r        = 2*zeta_d_psi*wn_psi-lambda;
+k_p_psi      = wn_psi^2-lambda*k_p_r;
 gamma_r      = 0.1;
-lambda       = 1;
+
 
 %% Simulation parameters
-t_sim = 2500; %s
+t_sim = 150; %s
 
 %% Run simulation
 sim_output = sim('simulering_ROV_FL_controller.slx');
