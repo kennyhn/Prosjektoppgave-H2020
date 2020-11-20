@@ -8,6 +8,16 @@ V_x     = 0.25; % m/s in x-axis inertial frame
 V_y     = -0.6; % m/s in y-axis inertial frame
 g_z     = 9.81;
 
+%% References
+psi_r1  = 45; %deg
+psi_r2  = 90; %deg
+u_r     = 0.2; %m/s
+v_r     = 0; %m/s
+z_r     = 1; %m
+
+zeta_ref    = 1; % critical damping
+omega_ref   = 0.4; % Desired bandwidth
+T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
 % Velocity controller gains
@@ -40,7 +50,7 @@ gamma_r      = 0.1;
 
 
 %% Simulation parameters
-t_sim = 150; %s
+t_sim = 2500; %s
 
 %% Run simulation
 sim_output = sim('simulering_ROV_FL_controller.slx');
@@ -53,6 +63,8 @@ tau_unsat       = sim_output.tau_unsat.signals.values;
 tau_sat         = sim_output.tau_sat.signals.values;
 
 psi_d           = sim_output.psi_d.signals.values;
+u_d             = sim_output.u_d.signals.values;
+v_d             = sim_output.v_d.signals.values;
 
 Vc              = sim_output.disturbance.signals.values;
 
