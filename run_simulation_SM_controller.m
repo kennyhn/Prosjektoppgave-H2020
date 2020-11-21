@@ -6,7 +6,7 @@ constants_model_coriolis
 % Current (disturbance). Constant
 V_x     = 0.25; % m/s in x-axis inertial frame
 V_y     = -0.6; % m/s in y-axis inertial frame
-g_z     = 9.81;
+g_z     = 0.91; % Restoring forces. Slightly buoyant
 
 %% References
 psi_r1  = 45; %deg
