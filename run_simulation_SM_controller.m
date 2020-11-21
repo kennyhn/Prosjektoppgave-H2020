@@ -1,6 +1,6 @@
 clc; close all;
 %% Create all constants
-constants_model_coriolis
+constants
 
 %% Disturbance
 % Current (disturbance). Constant

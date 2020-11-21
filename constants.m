@@ -129,12 +129,12 @@ B       = [b11 b12 b13 b14 b15 b16;
             b61 b62 b63 b64 b65 b66];
 
 
-B_law       = [b11 b12 b13 b14 b15 b16;
+B_aug       = [b11 b12 b13 b14 b15 b16;
             b21 b22 b23 b24 b25 b26;
             b31 b32 b33 b34 b35 b36;
             b61 b62 b63 b64 b65 b66];
 
-B_psinv_law = B_law'/(B_law*B_law');
+B_psinv_aug = B_aug'/(B_aug*B_aug');
 
 
 

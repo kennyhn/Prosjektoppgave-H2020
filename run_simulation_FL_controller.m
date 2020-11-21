@@ -1,11 +1,11 @@
 clc; close all;
 %% Create all constants
-constants_model_coriolis
+constants
 
 %% Disturbance
 % Current (disturbance). Constant
-V_x     = 0; % m/s in x-axis inertial frame
-V_y     = -0.8; % m/s in y-axis inertial frame
+V_x     = 0.25; % m/s in x-axis inertial frame
+V_y     = -0.6; % m/s in y-axis inertial frame
 g_z     = 0.91; % Restoring forces. Slightly buoyant
 
 %% References
@@ -39,7 +39,7 @@ k_d_w        = 2*m_33*zeta_d_heave*wn_heave-d_33;
 k_i_w        = wn_heave/10*k_p_w;
 
 % Heading controller gains
-lambda       = d_44; % tuning system damping must be greater than 0
+lambda       = d_66; % tuning system damping must be greater than 0
 zeta_d_psi   = 1; % Critical damping
 wb_d_psi     = 0.8; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));

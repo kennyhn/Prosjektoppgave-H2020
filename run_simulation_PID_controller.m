@@ -1,6 +1,6 @@
 clc; close all;
 %% Create all constants
-constants_model_coriolis
+constants
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -40,8 +40,8 @@ zeta_d_psi   = 1; % Critical damping
 wb_d_psi     = 0.7; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
-k_p_psi      = wn_psi^2*m_44;
-k_d_psi      = 2*m_44*zeta_d_psi*wn_psi-d_44;
+k_p_psi      = wn_psi^2*m_66;
+k_d_psi      = 2*m_66*zeta_d_psi*wn_psi-d_66;
 k_i_psi      = wn_psi/10*k_p_psi;
 
 %% Adaptive gains

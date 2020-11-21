@@ -1,6 +1,6 @@
 clc; close all;
 %% Create all constants
-constants_dp_model
+constants
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -13,7 +13,7 @@ psi_r1  = 45; %deg
 psi_r2  = 120; %deg
 u_r     = 0.2; %m/s
 v_r     = 0.2; %m/s
-z_r     = 15; %m
+z_r     = 1; %m
 
 zeta_ref    = 1; % critical damping
 omega_ref   = 0.4; % Desired bandwidth
@@ -40,8 +40,8 @@ zeta_d_psi   = 1; % Critical damping
 wb_d_psi     = 0.8; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
-k_p_psi      = wn_psi^2*m_44;
-k_d_psi      = 2*m_44*zeta_d_psi*wn_psi-d_44;
+k_p_psi      = wn_psi^2*m_66;
+k_d_psi      = 2*m_66*zeta_d_psi*wn_psi-d_66;
 k_i_psi      = 1/10*k_p_psi;
 %% Adaptive controller gains
 gamma1      = 0.5;
