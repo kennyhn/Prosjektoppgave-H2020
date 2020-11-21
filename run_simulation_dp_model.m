@@ -10,9 +10,9 @@ g_z     = 9.81;
 
 %% References
 psi_r1  = 45; %deg
-psi_r2  = 90; %deg
+psi_r2  = 120; %deg
 u_r     = 0.2; %m/s
-v_r     = 0; %m/s
+v_r     = 0.2; %m/s
 z_r     = 1; %m
 
 zeta_ref    = 1; % critical damping
@@ -37,7 +37,7 @@ k_i_w        = wn_heave/10*k_p_w;
 
 % Heading controller gains
 zeta_d_psi   = 1; % Critical damping
-wb_d_psi     = 0.3; % desired bandwidth on heading
+wb_d_psi     = 0.8; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
 k_p_psi      = wn_psi^2*m_44;
