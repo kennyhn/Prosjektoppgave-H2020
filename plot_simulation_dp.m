@@ -106,7 +106,7 @@ figure();
 gcf();
 subplot(2, 1, 1);
 hold on
-plot(time, Vx*ones(size(time)), 'b--');
+plot(time, Vx, 'b--');
 plot(time, v_x_hat, 'b');
 hold off;
 grid on;
@@ -117,7 +117,7 @@ ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 1, 2);
 hold on;
-plot(time, Vy*ones(size(time)), 'b--');
+plot(time, Vy, 'b--');
 plot(time, v_y_hat, 'b');
 grid on;
 legend('$V_y$', '$\hat{V}_{y}$', 'Interpreter' ,'latex');

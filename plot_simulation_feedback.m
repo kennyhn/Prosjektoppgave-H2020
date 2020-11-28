@@ -106,7 +106,7 @@ figure();
 gcf();
 subplot(2, 2, 1);
 hold on
-plot(time, Vx*ones(size(time)), 'b--');
+plot(time, Vx, 'b--');
 plot(time, v_xu_hat, 'b');
 hold off;
 grid on;
@@ -117,7 +117,7 @@ ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 2, 2);
 hold on;
-plot(time, Vy*ones(size(time)), 'b--');
+plot(time, Vy, 'b--');
 plot(time, v_yu_hat, 'b');
 grid on;
 legend('$V_y$', '$\hat{V}_{yu}$', 'Interpreter' ,'latex');
@@ -127,7 +127,7 @@ ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 2, 3);
 hold on;
-plot(time, Vx*ones(size(time)), 'b--');
+plot(time, Vx, 'b--');
 plot(time, v_xv_hat, 'b');
 grid on;
 legend('$V_x$', '$\hat{V}_{xv}$', 'Interpreter' ,'latex');
@@ -137,7 +137,7 @@ ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 2, 4);
 hold on;
-plot(time, Vy*ones(size(time)), 'b--');
+plot(time, Vy, 'b--');
 plot(time, v_yv_hat, 'b');
 grid on;
 legend('$V_y$', '$\hat{V}_{yv}$', 'Interpreter' ,'latex');
@@ -151,7 +151,7 @@ figure();
 gcf();
 subplot(2, 2, 1);
 hold on
-plot(time, Vx*ones(size(time)), 'b--');
+plot(time, Vx, 'b--');
 plot(time, v_xr_hat, 'b');
 hold off;
 grid on;
@@ -162,7 +162,7 @@ ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 2, 2);
 hold on;
-plot(time, Vy*ones(size(time)), 'b--');
+plot(time, Vy, 'b--');
 plot(time, v_yr_hat, 'b');
 grid on;
 legend('$V_y$', '$\hat{V}_{yr}$', 'Interpreter' ,'latex');
@@ -172,7 +172,7 @@ ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 2, 3);
 hold on;
-plot(time, Vx*Vx*ones(size(time)), 'b--');
+plot(time, Vx.*Vx, 'b--');
 plot(time, v_xr_hat_sq, 'b');
 grid on;
 legend('$V_x^2$', '$\hat{V}_{xr}^2$', 'Interpreter' ,'latex');
@@ -182,7 +182,7 @@ ylabel('$V_x^2$ [m/s]', 'Interpreter', 'latex');
 
 subplot(2, 2, 4);
 hold on;
-plot(time, Vy*Vy*ones(size(time)), 'b--');
+plot(time, Vy.*Vy, 'b--');
 plot(time, v_yr_hat_sq, 'b');
 grid on;
 legend('$V_y^2$', '$\hat{V}_{yr}^2$', 'Interpreter' ,'latex');
@@ -194,7 +194,7 @@ hold off;
 figure()
 gcf();
 hold on;
-plot(time, Vx*Vy*ones(size(time)), 'b--');
+plot(time, Vx.*Vy, 'b--');
 plot(time, v_xyr_hat, 'b');
 legend('$V_{xy}$', '$\hat{V}_{xyr}$', 'Interpreter' ,'latex');
 grid on;

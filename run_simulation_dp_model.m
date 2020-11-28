@@ -4,16 +4,18 @@ constants
 
 %% Disturbance
 % Current (disturbance). Constant
-V_x     = 0.25; % m/s in x-axis inertial frame
-V_y     = -0.6; % m/s in y-axis inertial frame
+%V_x     = 0.25; % m/s in x-axis inertial frame
+%V_y     = -0.6; % m/s in y-axis inertial frame
+V_x_mat = load('Vx_disturbance.mat').u;
+V_y_mat = load('Vy_disturbance.mat').v;
 g_z     = 0.91; % Restoring forces. Slightly buyoant
 
 %% References
-psi_r1  = 45; %deg
-psi_r2  = 120; %deg
+psi_r1  = 0; %deg
+psi_r2  = 0; %deg
 u_r     = 0.2; %m/s
-v_r     = 0.2; %m/s
-z_r     = 1; %m
+v_r     = 0; %m/s
+z_r     = 10; %m
 
 zeta_ref    = 1; % critical damping
 omega_ref   = 0.4; % Desired bandwidth
@@ -48,7 +50,7 @@ gamma1      = 0.5;
 gamma2      = 0.5;
 
 %% Simulation parameters
-t_sim = 2500; %s
+t_sim = 999; %s
 
 %% Run simulation
 sim_output = sim('simulering_ROV_DP_model.slx');

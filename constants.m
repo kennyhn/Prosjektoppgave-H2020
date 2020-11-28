@@ -69,6 +69,13 @@ d_44    = 20;
 d_55    = 20;
 d_66    = 15;
 
+d_n11   = 350;
+d_n22   = 350;
+d_n33   = 400;
+d_n44   = 100;
+d_n55   = 100;
+d_n66   = 75;
+
 %% Definitions
 b11     = cos(alpha1);
 b12     = cos(alpha2);
@@ -135,23 +142,16 @@ B_aug       = [b11 b12 b13 b14 b15 b16;
             b61 b62 b63 b64 b65 b66];
 
 B_psinv_aug = B_aug'/(B_aug*B_aug');
-
-
-
-% Principle rotation matrix about z-axis
-R_z     = @(psi)([cos(psi) -sin(psi) 0 0;
-                  sin(psi) cos(psi) 0 0;
-                  0 0 1 0;
-                  0 0 0 1]);
               
+% Initial states
 %% Initial values
 % 4 DoF position in inertial frame
-x0      = 0; %m
+x0      = -2*50; %m
 y0      = 0; %m
 z0      = 0; %m
 phi0    = 0; %deg
 theta0  = 0; %deg
-psi0    = 0; %deg
+psi0    = -45; %deg
 phi0    = deg2rad(phi0);   %rad
 theta0  = deg2rad(theta0); %rad
 psi0    = deg2rad(psi0);   %rad
