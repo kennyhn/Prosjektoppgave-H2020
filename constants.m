@@ -2,9 +2,6 @@ clear all; close all; clc;
 
 %% Constants for the matrices
 % ROV dimension
-V_x         = 1;
-V_y         = 0;
-
 ROV_length  = 0.9;
 ROV_width   = 0.65;
 ROV_height  = 0.5;
@@ -146,8 +143,8 @@ B_psinv_aug = B_aug'/(B_aug*B_aug');
 % Initial states
 %% Initial values
 % 4 DoF position in inertial frame
-x0      = -2*50; %m
-y0      = 0; %m
+x0      = -100; %m
+y0      = 50; %m
 z0      = 0; %m
 phi0    = 0; %deg
 theta0  = 0; %deg

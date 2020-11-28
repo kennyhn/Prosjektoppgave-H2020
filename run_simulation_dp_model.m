@@ -11,11 +11,18 @@ V_y_mat = load('Vy_disturbance.mat').v;
 g_z     = 0.91; % Restoring forces. Slightly buyoant
 
 %% References
-psi_r1  = 0; %deg
-psi_r2  = 0; %deg
 u_r     = 0.2; %m/s
 v_r     = 0; %m/s
 z_r     = 10; %m
+
+% Guidance law parameters
+Delta   = 25; % Lookahead distance
+x_start = -2*50;
+y_start = 1*50;
+x_los   = 2*50;
+y_los   = 1*50;
+
+alpha_los = atan2(y_los-y_start,x_los-x_start);
 
 zeta_ref    = 1; % critical damping
 omega_ref   = 0.4; % Desired bandwidth
