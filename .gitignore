@@ -357,4 +357,8 @@ slprj/
 *.autosave
 
 # Simulation files
-**/simulation_output/*
+**/simulation_output/
+**/WakeEffect_MATLAB/
+
+#Figures
+*.eps
