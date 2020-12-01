@@ -144,7 +144,7 @@ B_psinv_aug = B_aug'/(B_aug*B_aug');
 %% Initial values
 % 4 DoF position in inertial frame
 x0      = -100; %m
-y0      = 50; %m
+y0      = 80; %m
 z0      = 0; %m
 phi0    = 0; %deg
 theta0  = 0; %deg

@@ -1,6 +1,9 @@
-clc; close all;
+clc;
 %% Create all constants
 constants
+
+save_simulation     = 1; % 1 for true 0 for false
+filename            = 'simulation_output/SM_controller/SM_controller_guidance.mat';
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -11,18 +14,23 @@ V_y_mat = load('Vy_disturbance.mat').v;
 g_z     = 0.91; % Restoring forces. Slightly buoyant
 
 %% References
-psi_r1  = 0; %deg
-psi_r2  = 0; %deg
 u_r     = 0.2; %m/s
 v_r     = 0; %m/s
-z_r     = 1; %m
+z_r     = 10; %m
+
+step_response   = 0; % 1 for true 0 for false
+psi_r1          = 0; % deg
+psi_r2          = 45; % deg
+time_step       = 700; % seconds. about right after passing the farm
+psi_r1          = deg2rad(psi_r1); % rad
+psi_r2          = deg2rad(psi_r2); % rad
 
 % Guidance law parameters
 Delta   = 25; % Lookahead distance
 x_start = -2*50;
-y_start = 1*50;
+y_start = 1*80;
 x_los   = 2*50;
-y_los   = 1*50;
+y_los   = 1*80;
 
 alpha_los = atan2(y_los-y_start,x_los-x_start);
 
@@ -32,27 +40,27 @@ T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
 % Velocity controller gains
-lambda_u    = 10;
-phi_u       = 5;
-k_p_u       = 2;
-k_s_u       = 3;
+lambda_u    = 0.5; %10;
+phi_u       = 1; %5;
+k_d_u       = 5;
+k_s_u       = 500; %3;
 
-lambda_v    = 10;
-phi_v       = 5;
-k_p_v       = 2;
-k_s_v       = 3;
+lambda_v    = 0.5; %10;
+phi_v       = 1; %5;
+k_d_v       = 3; %5;
+k_s_v       = 400; %3;
 
 % Depth controller gains
-lambda_z    = 10;
-phi_z       = 1;
-k_p_z       = 1; 
-k_s_z       = 1;
+lambda_z    = 3; %10;
+phi_z       = 0.5; %1;
+k_d_z       = 30; %1; 
+k_s_z       = 10; %1;
 
 % Heading controller gains
-lambda_psi  = 35;
-phi_psi     = deg2rad(10);
-k_p_psi     = 20;
-k_s_psi     = 25;
+lambda_psi  = 1; %35;
+phi_psi     = 0.5; %deg2rad(10);
+k_d_psi     = 10; %20;
+k_s_psi     = 50; %25;
 
 %% Adaptive gains
 gamma_u     = 0.1;
@@ -76,6 +84,7 @@ tau_sat         = sim_output.tau_sat.signals.values;
 psi_d           = sim_output.psi_d.signals.values;
 u_d             = sim_output.u_d.signals.values;
 v_d             = sim_output.v_d.signals.values;
+z_d             = sim_output.z_d.signals.values;
 
 Vc              = sim_output.disturbance.signals.values;
 
@@ -120,6 +129,10 @@ v_yr_hat_sq     = sim_output.V_yr_hat_sq.signals.values;
 v_xyr_hat       = sim_output.V_xyr_hat.signals.values;
 
 time            = sim_output.eta.time;
+
+if save_simulation == 1
+    save(filename, 'sim_output');
+end
 
 %% Run plot script
 plot_simulation_feedback

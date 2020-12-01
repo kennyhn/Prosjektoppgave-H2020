@@ -2,6 +2,9 @@ clc; close all;
 %% Create all constants
 constants
 
+save_simulation     = 1; % 1 for true 0 for false
+filename            = 'simulation_output/PID_controller/PID_controller_guidance.mat';
+
 %% Disturbance
 % Current (disturbance). Constant
 %V_x     = 0.25; % m/s in x-axis inertial frame
@@ -11,35 +14,40 @@ V_y_mat = load('Vy_disturbance.mat').v;
 g_z     = 0.91; % Restorings forces. Slightly buoyant
 
 %% References
-psi_r1  = 0; %deg
-psi_r2  = 0; %deg
 u_r     = 0.2; %m/s
 v_r     = 0; %m/s
-z_r     = 1; %m
+z_r     = 10; %m
+
+step_response   = 0; % 1 for true 0 for false
+psi_r1      = 0; % deg
+psi_r2      = 45; % deg
+time_step   = 700; % seconds. about right after passing the farm
+psi_r1      = deg2rad(psi_r1); % rad
+psi_r2      = deg2rad(psi_r2); % rad
 
 % Guidance law parameters
 Delta   = 25; % Lookahead distance
 x_start = -2*50;
-y_start = 1*50;
+y_start = 80;
 x_los   = 2*50;
-y_los   = 1*50;
+y_los   = 80;
 
 alpha_los = atan2(y_los-y_start,x_los-x_start);
 
 zeta_ref    = 1; % critical damping
-omega_ref   = 0.4; % Desired bandwidth
+omega_ref   = 1; % Desired bandwidth
 T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
 % Velocity controller gains
-k_p_u   = 10;
+k_p_u   = 25;
 k_i_u   = k_p_u/10;
-k_p_v   = 10;
+k_p_v   = 25;
 k_i_v   = k_p_v/10;
 
 % Depth controller gains
 zeta_d_heave = 1; % Critical damping
-wb_d_heave   = 0.5; % desired bandwidth on heave
+wb_d_heave   = 0.3; % desired bandwidth on heave
 wn_heave     = wb_d_heave/sqrt(1-2*zeta_d_heave^2+sqrt(4*zeta_d_heave^4-4*zeta_d_heave^2+2));
 
 k_p_z        = wn_heave^2*m_33; 
@@ -47,8 +55,8 @@ k_i_z        = wn_heave/10*k_p_z;
 
 % Heading controller gains
 % Might need to do a new analysis on this tuning
-zeta_d_psi   = 1; % Critical damping
-wb_d_psi     = 0.7; % desired bandwidth on heading
+zeta_d_psi   = 1.5; % Critical damping
+wb_d_psi     = 1; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
 k_p_psi      = wn_psi^2*m_66;
@@ -77,6 +85,7 @@ tau_sat         = sim_output.tau_sat.signals.values;
 psi_d           = sim_output.psi_d.signals.values;
 u_d             = sim_output.u_d.signals.values;
 v_d             = sim_output.v_d.signals.values;
+z_d             = sim_output.z_d.signals.values;
 
 Vc              = sim_output.disturbance.signals.values;
 
@@ -121,6 +130,10 @@ v_yr_hat_sq     = sim_output.V_yr_hat_sq.signals.values;
 v_xyr_hat       = sim_output.V_xyr_hat.signals.values;
 
 time            = sim_output.eta.time;
+
+if save_simulation == 1
+    save(filename, 'sim_output');
+end
 
 %% Run plot script
 plot_simulation_feedback

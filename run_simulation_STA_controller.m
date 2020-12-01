@@ -11,8 +11,8 @@ V_y_mat = load('Vy_disturbance.mat').v;
 g_z     = 0.91; % Restoring forces. Slightly buoyant
 
 %% References
-psi_r1  = 0; %deg
-psi_r2  = 0; %deg
+psi_r1  = -45; %deg
+psi_r2  = -45; %deg
 u_r     = 0.2; %m/s
 v_r     = 0; %m/s
 z_r     = 1; %m
@@ -31,29 +31,29 @@ omega_ref   = 0.4; % Desired bandwidth
 T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
-alpha_m_u   = 1;
-omega_u     = 1;
+alpha_m_u   = 1.5;
+omega_u     = 0.01;
 gam_u       = 1;
-epsilon_u   = 1;
-lambda_u    = 1;
+epsilon_u   = 0.0001;
+lambda_u    = 10;
 
-alpha_m_v   = 1;
-omega_v     = 1;
+alpha_m_v   = 1.5;
+omega_v     = 0.01;
 gam_v       = 1;
-epsilon_v   = 1;
-lambda_v    = 1;
+epsilon_v   = 0.0001;
+lambda_v    = 10;
 
-alpha_m_w   = 1;
-omega_w     = 1;
+alpha_m_w   = 1.5;
+omega_w     = 0.01;
 gam_w       = 1;
-epsilon_w   = 1;
-lambda_w    = 1;
+epsilon_w   = 0.0001;
+lambda_w    = 0.5;
 
-alpha_m_psi = 1;
-omega_psi   = 1;
+alpha_m_psi = 1.5;
+omega_psi   = 0.001;
 gam_psi     = 1;
-epsilon_psi = 1;
-lambda_psi  = 1;
+epsilon_psi = 0.0001;
+lambda_psi  = 0.5;
 
 
 %% Adaptive gains
@@ -63,7 +63,7 @@ gamma_r     = 0.1;
 lambda      = 1;
 
 %% Simulation parameters
-t_sim = 999; %s
+t_sim = 668; %s
 
 %% Run simulation
 sim_output = sim('simulering_ROV_STA_controller.slx');
