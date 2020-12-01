@@ -355,3 +355,6 @@ MigrationBackup/
 slprj/
 **/slprj/
 *.autosave
+
+# Simulation files
+**/simulation_output/
