@@ -357,4 +357,4 @@ slprj/
 *.autosave
 
 # Simulation files
-**/simulation_output/
+**/simulation_output/*

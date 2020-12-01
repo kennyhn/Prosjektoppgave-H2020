@@ -2,8 +2,8 @@ clc; close all;
 %% Create all constants
 constants
 
-save_simulation     = 1; % 1 for true 0 for false
-filename            = 'simulation_output/FL_controller/FL_controller_guidance.mat';
+save_simulation     = 0; % 1 for true 0 for false
+filename            = 'simulation_output/FL_controller/FL_controller';
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -69,71 +69,23 @@ gamma_r      = 2;
 
 
 %% Simulation parameters
-t_sim = 995; %s
-
+if step_response == 1
+    t_sim = 1119; %s
+else
+    t_sim = 995; %s
+end
 %% Run simulation
 sim_output = sim('simulering_ROV_FL_controller.slx');
 
-%% Parse out results
-nu              = sim_output.nu.signals.values;
-eta             = sim_output.eta.signals.values;
-
-tau_unsat       = sim_output.tau_unsat.signals.values;
-tau_sat         = sim_output.tau_sat.signals.values;
-
-psi_d           = sim_output.psi_d.signals.values;
-u_d             = sim_output.u_d.signals.values;
-v_d             = sim_output.v_d.signals.values;
-z_d             = sim_output.z_d.signals.values;
-
-
-Vc              = sim_output.disturbance.signals.values;
-
-
-Vx              = Vc(:, 1);
-Vy              = Vc(:, 2);
-
-% Tilstander
-x               = eta(:, 1);
-y               = eta(:, 2);
-z               = eta(:, 3);
-psi             = eta(:, 4);
-u               = nu(:, 1);
-v               = nu(:, 2);
-w               = nu(:, 3);
-r               = nu(:, 4);
-
-
-% Control inputs
-tau_u_unsat     = tau_unsat(:, 1);
-tau_v_unsat     = tau_unsat(:, 2);
-tau_w_unsat     = tau_unsat(:, 3);
-tau_r_unsat     = tau_unsat(:, 4);
-
-tau_u_sat       = tau_sat(:, 1);
-tau_v_sat       = tau_sat(:, 2);
-tau_w_sat       = tau_sat(:, 3);
-tau_r_sat       = tau_sat(:, 4);
-
-% Parameterestimater for forstyrrelsene
-
-v_xu_hat        = sim_output.V_xu_hat.signals.values;
-v_yu_hat        = sim_output.V_yu_hat.signals.values;
-
-v_xv_hat        = sim_output.V_xv_hat.signals.values;
-v_yv_hat        = sim_output.V_yv_hat.signals.values;
-
-v_xr_hat        = sim_output.V_xr_hat.signals.values;
-v_yr_hat        = sim_output.V_yr_hat.signals.values;
-v_xr_hat_sq     = sim_output.V_xr_hat_sq.signals.values;
-v_yr_hat_sq     = sim_output.V_yr_hat_sq.signals.values;
-v_xyr_hat       = sim_output.V_xyr_hat.signals.values;
-
-time            = sim_output.eta.time;
-
 
 if save_simulation == 1
+    if step_response == 1
+        filename = strcat(filename, '_step.mat');
+    else
+        filename = strcat(filename, '_guidance.mat');
+    end
     save(filename, 'sim_output');
 end
+
 %% Run plot script
 plot_simulation_feedback

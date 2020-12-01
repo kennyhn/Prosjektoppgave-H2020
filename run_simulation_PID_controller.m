@@ -2,8 +2,8 @@ clc; close all;
 %% Create all constants
 constants
 
-save_simulation     = 1; % 1 for true 0 for false
-filename            = 'simulation_output/PID_controller/PID_controller_guidance.mat';
+save_simulation     = 0; % 1 for true 0 for false
+filename            = 'simulation_output/PID_controller/PID_controller';
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -11,7 +11,7 @@ filename            = 'simulation_output/PID_controller/PID_controller_guidance.
 %V_y     = -0.6; % m/s in y-axis inertial frame
 V_x_mat = load('Vx_disturbance.mat').u;
 V_y_mat = load('Vy_disturbance.mat').v;
-g_z     = 0.91; % Restorings forces. Slightly buoyant
+g_z     = 0.91; % Restoring forces. Slightly buoyant
 
 %% References
 u_r     = 0.2; %m/s
@@ -46,8 +46,8 @@ k_p_v   = 25;
 k_i_v   = k_p_v/10;
 
 % Depth controller gains
-zeta_d_heave = 1; % Critical damping
-wb_d_heave   = 0.3; % desired bandwidth on heave
+zeta_d_heave = 0.8; % Critical damping
+wb_d_heave   = 0.2; % desired bandwidth on heave
 wn_heave     = wb_d_heave/sqrt(1-2*zeta_d_heave^2+sqrt(4*zeta_d_heave^4-4*zeta_d_heave^2+2));
 
 k_p_z        = wn_heave^2*m_33; 
@@ -70,68 +70,21 @@ gamma_r     = 0.1;
 lambda      = 1;
 
 %% Simulation parameters
-t_sim = 999; %s
+if step_response == 1
+    t_sim = 1092; %s
+else
+    t_sim = 999; %s
+end
 
 %% Run simulation
 sim_output = sim('simulering_ROV_PID_controller.slx');
 
-%% Parse out results
-nu              = sim_output.nu.signals.values;
-eta             = sim_output.eta.signals.values;
-
-tau_unsat       = sim_output.tau_unsat.signals.values;
-tau_sat         = sim_output.tau_sat.signals.values;
-
-psi_d           = sim_output.psi_d.signals.values;
-u_d             = sim_output.u_d.signals.values;
-v_d             = sim_output.v_d.signals.values;
-z_d             = sim_output.z_d.signals.values;
-
-Vc              = sim_output.disturbance.signals.values;
-
-
-Vx              = Vc(:, 1);
-Vy              = Vc(:, 2);
-
-% Tilstander
-x               = eta(:, 1);
-y               = eta(:, 2);
-z               = eta(:, 3);
-psi             = eta(:, 4);
-u               = nu(:, 1);
-v               = nu(:, 2);
-w               = nu(:, 3);
-r               = nu(:, 4);
-
-
-% Control inputs
-tau_u_unsat     = tau_unsat(:, 1);
-tau_v_unsat     = tau_unsat(:, 2);
-tau_w_unsat     = tau_unsat(:, 3);
-tau_r_unsat     = tau_unsat(:, 4);
-
-tau_u_sat       = tau_sat(:, 1);
-tau_v_sat       = tau_sat(:, 2);
-tau_w_sat       = tau_sat(:, 3);
-tau_r_sat       = tau_sat(:, 4);
-
-% Parameterestimater for forstyrrelsene
-
-v_xu_hat        = sim_output.V_xu_hat.signals.values;
-v_yu_hat        = sim_output.V_yu_hat.signals.values;
-
-v_xv_hat        = sim_output.V_xv_hat.signals.values;
-v_yv_hat        = sim_output.V_yv_hat.signals.values;
-
-v_xr_hat        = sim_output.V_xr_hat.signals.values;
-v_yr_hat        = sim_output.V_yr_hat.signals.values;
-v_xr_hat_sq     = sim_output.V_xr_hat_sq.signals.values;
-v_yr_hat_sq     = sim_output.V_yr_hat_sq.signals.values;
-v_xyr_hat       = sim_output.V_xyr_hat.signals.values;
-
-time            = sim_output.eta.time;
-
 if save_simulation == 1
+    if step_response == 1
+        filename = strcat(filename, '_step.mat');
+    else
+        filename = strcat(filename, '_guidance.mat');
+    end
     save(filename, 'sim_output');
 end
 

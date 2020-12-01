@@ -2,8 +2,8 @@ clc; close all;
 %% Create all constants
 constants
 
-save_simulation     = 1; % 1 for true 0 for false
-filename            = 'simulation_output/dp_model/dp_model_guidance.mat';
+save_simulation     = 0; % 1 for true 0 for false
+filename            = 'simulation_output/dp_model/dp_model';
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -68,60 +68,21 @@ gamma1      = 50;
 gamma2      = 35;
 
 %% Simulation parameters
-t_sim = 1000; %s
+if step_response == 1
+    t_sim = 1121; %s
+else
+    t_sim = 1000; %s
+end
 
 %% Run simulation
 sim_output = sim('simulering_ROV_DP_model.slx');
 
-%% Parse out results
-nu              = sim_output.nu.signals.values;
-eta             = sim_output.eta.signals.values;
-
-tau_unsat       = sim_output.tau_unsat.signals.values;
-tau_sat         = sim_output.tau_sat.signals.values;
-
-psi_d           = sim_output.psi_d.signals.values;
-u_d             = sim_output.u_d.signals.values;
-v_d             = sim_output.v_d.signals.values;
-z_d             = sim_output.z_d.signals.values;
-
-
-Vc              = sim_output.disturbance.signals.values;
-
-
-Vx              = Vc(:, 1);
-Vy              = Vc(:, 2);
-
-% Tilstander
-x               = eta(:, 1);
-y               = eta(:, 2);
-z               = eta(:, 3);
-psi             = eta(:, 4);
-u               = nu(:, 1);
-v               = nu(:, 2);
-w               = nu(:, 3);
-r               = nu(:, 4);
-
-
-% Control inputs
-tau_u_unsat     = tau_unsat(:, 1);
-tau_v_unsat     = tau_unsat(:, 2);
-tau_w_unsat     = tau_unsat(:, 3);
-tau_r_unsat     = tau_unsat(:, 4);
-
-tau_u_sat       = tau_sat(:, 1);
-tau_v_sat       = tau_sat(:, 2);
-tau_w_sat       = tau_sat(:, 3);
-tau_r_sat       = tau_sat(:, 4);
-
-% Parameterestimater for forstyrrelsene
-v_x_hat         = sim_output.V_x_hat.signals.values;
-v_y_hat         = sim_output.V_y_hat.signals.values;
-
-time            = sim_output.eta.time;
-
-
 if save_simulation == 1
+    if step_response == 1
+        filename = strcat(filename, '_step.mat');
+    else
+        filename = strcat(filename, '_guidance.mat');
+    end
     save(filename, 'sim_output');
 end
 
