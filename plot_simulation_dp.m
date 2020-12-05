@@ -2,11 +2,11 @@
 use_saved_file = 0; % 1 for true 0 for false
 
 if use_saved_file == 1
-   clear all;
+   clear; close all;
    step_response  = 1; % 0 for guidance, 1 for step
    filename   = 'simulation_output/dp_model/dp_model';
    
-   if step_response == 1
+   if step_response == 0
        % Guidance law parameters
        Delta   = 25; % Lookahead distance
        x_start = -2*50;

@@ -3,10 +3,10 @@ use_saved_file = 0; % 1 for true 0 for false
 
 
 if use_saved_file == 1
-   clear;
+   clear; close all
    % options
    controller     = 1; % 0 for FL, 1 for PID, 2 for SM
-   step_response  = 0; % 0 for guidance, 1 for step
+   step_response  = 1; % 0 for guidance, 1 for step
    filename   = 'simulation_output/';
    
    if controller == 0
@@ -183,8 +183,8 @@ plot(time, tau_u_sat, 'b', 'LineWidth', 2);
 plot(time, tau_u_unsat, 'r--', 'LineWidth', 2);
 hold off;
 grid on;
-legend('$\tau_u$', '$\tau_{u_{unsat}}$', 'Interpreter' ,'latex');
-title('Controller input surge');
+legend('$\tau_u$', '$\tau_{u_{unsat}}$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Controller input surge', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_u$ [N]', 'Interpreter', 'latex');
 
@@ -194,8 +194,8 @@ plot(time, tau_v_sat, 'b', 'LineWidth', 2);
 plot(time, tau_v_unsat, 'r--', 'LineWidth', 2);
 hold off;
 grid on;
-legend('$\tau_v$', '$\tau_{v_{unsat}}$', 'Interpreter' ,'latex');
-title('Controller input sway');
+legend('$\tau_v$', '$\tau_{v_{unsat}}$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Controller input sway', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_v$ [N]', 'Interpreter', 'latex');
 
@@ -205,8 +205,8 @@ plot(time, tau_w_sat, 'b', 'LineWidth', 2);
 plot(time, tau_w_unsat, 'r--', 'LineWidth', 2);
 hold off;
 grid on;
-legend('$\tau_{w}$', '$\tau_{w_{unsat}}$', 'Interpreter', 'latex');
-title('Controller input heave');
+legend('$\tau_{w}$', '$\tau_{w_{unsat}}$', 'Interpreter', 'latex', 'FontSize', 14);
+title('Controller input heave', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_w$ [Nm]', 'Interpreter', 'latex');
 
@@ -216,8 +216,8 @@ plot(time, tau_r_sat, 'b', 'LineWidth', 2);
 plot(time, tau_r_unsat, 'r--', 'LineWidth', 2);
 hold off;
 grid on;
-legend('$\tau_r$', '$\tau_{r_{unsat}}$', 'Interpreter' ,'latex');
-title('Controller input heading');
+legend('$\tau_r$', '$\tau_{r_{unsat}}$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Controller input heading', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_r$ [Nm]', 'Interpreter', 'latex');
 hold off;
@@ -231,8 +231,8 @@ plot(time, v_xu_hat, 'b', 'LineWidth', 2);
 plot(time, Vx, 'r--', 'LineWidth', 2);
 hold off;
 grid on;
-legend('$\hat{V}_{xu}$', '$V_x$', 'Interpreter' ,'latex');
-title('Current estimate in x-direction, surge');
+legend('$\hat{V}_{xu}$', '$V_x$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $u$ estimate, surge controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
@@ -241,8 +241,8 @@ hold on;
 plot(time, v_yu_hat, 'b', 'LineWidth', 2);
 plot(time, Vy, 'r--', 'LineWidth', 2);
 grid on;
-legend('$\hat{V}_{yu}$', '$V_y$', 'Interpreter' ,'latex');
-title('Current estimate in y-direction, surge');
+legend('$\hat{V}_{yu}$', '$V_y$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $v$ estimate, surge controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
 
@@ -251,8 +251,8 @@ hold on;
 plot(time, v_xv_hat, 'b', 'LineWidth', 2);
 plot(time, Vx, 'r--', 'LineWidth', 2);
 grid on;
-legend('$\hat{V}_{xv}$', '$V_x$', 'Interpreter' ,'latex');
-title('Current estimate in x-direction, sway');
+legend('$\hat{V}_{xv}$', '$V_x$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $u$ estimate, sway controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
@@ -261,8 +261,8 @@ hold on;
 plot(time, v_yv_hat, 'b', 'LineWidth', 2);
 plot(time, Vy, 'r--', 'LineWidth', 2);
 grid on;
-legend('$\hat{V}_{yv}$', '$V_y$', 'Interpreter' ,'latex');
-title('Current estimate in y-direction, sway');
+legend('$\hat{V}_{yv}$', '$V_y$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $v$ estimate, sway controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
 hold off;
@@ -276,8 +276,8 @@ plot(time, v_xr_hat, 'b', 'LineWidth', 2);
 plot(time, Vx, 'r--', 'LineWidth', 2);
 hold off;
 grid on;
-legend('$\hat{V}_{xr}$', '$V_x$', 'Interpreter' ,'latex');
-title('Current estimate in x-direction, yaw');
+legend('$\hat{V}_{xr}$', '$V_x$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $u$ estimate, yaw controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
 
@@ -286,8 +286,8 @@ hold on;
 plot(time, v_yr_hat, 'b', 'LineWidth', 2);
 plot(time, Vy, 'r--', 'LineWidth', 2);
 grid on;
-legend('$\hat{V}_{yr}$', '$V_y$', 'Interpreter' ,'latex');
-title('Current estimate in y-direction, yaw');
+legend('$\hat{V}_{yr}$', '$V_y$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $v$ estimate, yaw controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
 
@@ -296,8 +296,8 @@ hold on;
 plot(time, v_xr_hat_sq, 'b', 'LineWidth', 2);
 plot(time, Vx.*Vx, 'r--', 'LineWidth', 2);
 grid on;
-legend('$\hat{V}_{xr}^2$', '$V_x^2$', 'Interpreter' ,'latex');
-title('Current estimate in x-direction, yaw');
+legend('$\hat{V}_{xr}^2$', '$V_x^2$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('Current $u^2$ estimate, yaw controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_x^2$ [m/s]', 'Interpreter', 'latex');
 
@@ -306,8 +306,8 @@ hold on;
 plot(time, v_yr_hat_sq, 'b', 'LineWidth', 2);
 plot(time, Vy.*Vy, 'r--', 'LineWidth', 2);
 grid on;
-legend('$\hat{V}_{yr}^2$', '$V_y^2$', 'Interpreter' ,'latex');
-title('Current estimate in y-direction, yaw');
+legend('$\hat{V}_{yr}^2$', '$V_y^2$', 'Interpreter' ,'Latex', 'FontSize', 14);
+title('Current $v^2$ estimate, yaw controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_y^2$ [m/s]', 'Interpreter', 'latex');
 hold off;
@@ -317,9 +317,9 @@ gcf();
 hold on;
 plot(time, v_xyr_hat, 'b', 'LineWidth', 2);
 plot(time, Vx.*Vy, 'r--', 'LineWidth', 2);
-legend('$\hat{V}_{xyr}$', '$V_{xy}$', 'Interpreter' ,'latex', 'FontSize', 14);
+legend('$\hat{V}_{xyr}$', '$V_{xy}$', 'Interpreter' ,'Latex', 'FontSize', 14);
 grid on;
-title('Current estimate xy, yaw', 'FontSize', 16);
+title('Current $uv$ estimate, yaw controller', 'Interpreter', 'Latex', 'FontSize', 16);
 xlabel('t [s]');
-ylabel('$V_{xy}$ [m/s]', 'Interpreter', 'latex');
+ylabel('$V_{xy}$ [m/s]', 'Interpreter', 'Latex');
 hold off;

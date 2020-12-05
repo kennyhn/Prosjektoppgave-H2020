@@ -2,7 +2,7 @@ clc; close all;
 %% Create all constants
 constants
 
-save_simulation     = 0; % 1 for true 0 for false
+save_simulation     = 1; % 1 for true 0 for false
 filename            = 'simulation_output/PID_controller/PID_controller';
 
 %% Disturbance
@@ -18,7 +18,7 @@ u_r     = 0.2; %m/s
 v_r     = 0; %m/s
 z_r     = 10; %m
 
-step_response   = 0; % 1 for true 0 for false
+step_response   = 1; % 1 for true 0 for false
 psi_r1      = 0; % deg
 psi_r2      = 45; % deg
 time_step   = 700; % seconds. about right after passing the farm
@@ -40,23 +40,25 @@ T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
 % Velocity controller gains
-k_p_u   = 25;
-k_i_u   = k_p_u/10;
-k_p_v   = 25;
-k_i_v   = k_p_v/10;
+pole_u  = 471.736111111;
+k_p_u   = m_11*pole_u-d_11;
+k_i_u   = k_p_u/1000;
+pole_v  = 611.234567901;
+k_p_v   = m_22*pole_v-d_22;
+k_i_v   = k_p_v/1000;
 
 % Depth controller gains
-zeta_d_heave = 0.8; % Critical damping
-wb_d_heave   = 0.2; % desired bandwidth on heave
+zeta_d_heave = 0.5; % Critical damping
+wb_d_heave   = 0.35; % desired bandwidth on heave
 wn_heave     = wb_d_heave/sqrt(1-2*zeta_d_heave^2+sqrt(4*zeta_d_heave^4-4*zeta_d_heave^2+2));
 
-k_p_z        = wn_heave^2*m_33; 
-k_i_z        = wn_heave/10*k_p_z;
+k_p_z        = wn_heave^2*m_33;
+k_i_z        = wn_heave/50*k_p_z;
 
 % Heading controller gains
 % Might need to do a new analysis on this tuning
-zeta_d_psi   = 1.5; % Critical damping
-wb_d_psi     = 1; % desired bandwidth on heading
+zeta_d_psi   = 0.498236818; % Critical damping
+wb_d_psi     = 2.039353174; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
 k_p_psi      = wn_psi^2*m_66;
@@ -71,7 +73,7 @@ lambda      = 1;
 
 %% Simulation parameters
 if step_response == 1
-    t_sim = 1092; %s
+    t_sim = 1062; %s
 else
     t_sim = 999; %s
 end

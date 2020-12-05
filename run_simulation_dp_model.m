@@ -18,7 +18,7 @@ u_r     = 0.2; % m/s
 v_r     = 0; % m/s
 z_r     = 10; % m
 
-step_response   = 0; % 1 for true 0 for false
+step_response   = 1; % 1 for true 0 for false
 psi_r1      = 0; % deg
 psi_r2      = 45; % deg
 time_step   = 700; % seconds. about right after passing the farm
@@ -41,9 +41,9 @@ T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
 % Velocity controller gains
-pole_u      = 5; % place pole at -value. Tune here
+pole_u      = 471.736111111; % place pole at -value. Tune here
 k_p_u       = pole_u-d_11/m_11;
-pole_v      = 7; % place pole at -value. Tune here
+pole_v      = 611.234567901; % place pole at -value. Tune here
 k_p_v       = pole_v-d_22/m_22;
 
 % Depth controller gains
@@ -53,23 +53,23 @@ wn_heave     = wb_d_heave/sqrt(1-2*zeta_d_heave^2+sqrt(4*zeta_d_heave^4-4*zeta_d
 
 k_p_w        = wn_heave^2*m_33; 
 k_d_w        = 2*m_33*zeta_d_heave*wn_heave-d_33;
-k_i_w        = 1/50*k_p_w;
+k_i_w        = wn_heave/50*k_p_w;
 
 % Heading controller gains
-zeta_d_psi   = 2;% 2.3; % damping ratios
-wb_d_psi     = 0.65; %0.8; % desired bandwidth on heading
+zeta_d_psi   = 0.498236818; % damping ratios
+wb_d_psi     = 2.039353174; % desired bandwidth on heading
 wn_psi       = wb_d_psi/sqrt(1-2*zeta_d_psi^2+sqrt(4*zeta_d_psi^4-4*zeta_d_psi^2+2));
 
 k_p_psi      = wn_psi^2*m_66;
 k_d_psi      = 2*m_66*zeta_d_psi*wn_psi-d_66;
-k_i_psi      = 1/40*k_p_psi;
+k_i_psi      = 0;%wn_psi/10*k_p_psi;
 %% Adaptive controller gains
 gamma1      = 50;
 gamma2      = 35;
 
 %% Simulation parameters
 if step_response == 1
-    t_sim = 1121; %s
+    t_sim = 1119; %s
 else
     t_sim = 1000; %s
 end
