@@ -1,9 +1,11 @@
-clc; close all;
+clc; close all; clear
+%% Set scenario
+step_response   = 0; % 1 for step response 0 for guidance
+save_simulation = 0; % 1 for true 0 for false
 %% Create all constants
 constants
 
-save_simulation     = 1; % 1 for true 0 for false
-filename            = 'simulation_output/PID_controller/PID_controller';
+filename        = 'simulation_output/PID_controller/PID_controller';
 
 %% Disturbance
 % Current (disturbance). Constant
@@ -14,11 +16,16 @@ V_y_mat = load('Vy_disturbance.mat').v;
 g_z     = 0.91; % Restoring forces. Slightly buoyant
 
 %% References
-u_r     = 0.2; %m/s
-v_r     = 0; %m/s
+if step_response == 1
+    u_r     = 0.2; % m/s
+    v_r     = 0; % m/s
+else
+    u_r     = 0.14; %m/s
+    v_r     = 0.14; %m/s
+end
+psi_r   = deg2rad(-45);
 z_r     = 10; %m
 
-step_response   = 1; % 1 for true 0 for false
 psi_r1      = 0; % deg
 psi_r2      = 45; % deg
 time_step   = 700; % seconds. about right after passing the farm
@@ -35,7 +42,7 @@ y_los   = 80;
 alpha_los = atan2(y_los-y_start,x_los-x_start);
 
 zeta_ref    = 1; % critical damping
-omega_ref   = 1; % Desired bandwidth
+omega_ref   = 1.5; % Desired bandwidth
 T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
@@ -73,9 +80,9 @@ lambda      = 1;
 
 %% Simulation parameters
 if step_response == 1
-    t_sim = 1062; %s
+    t_sim = 1124; %s
 else
-    t_sim = 999; %s
+    t_sim = 1010; %s
 end
 
 %% Run simulation

@@ -1,5 +1,3 @@
-clear all; close all; clc;
-
 %% Constants for the matrices
 % ROV dimension
 ROV_length  = 0.9;
@@ -148,7 +146,11 @@ y0      = 80; %m
 z0      = 0; %m
 phi0    = 0; %deg
 theta0  = 0; %deg
-psi0    = -45; %deg
+if step_response == 1
+    psi0    = -45; %deg
+else
+    psi0    = -90; %deg
+end
 phi0    = deg2rad(phi0);   %rad
 theta0  = deg2rad(theta0); %rad
 psi0    = deg2rad(psi0);   %rad
