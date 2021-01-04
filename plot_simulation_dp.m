@@ -82,24 +82,25 @@ theta       = (0:dtheta:N_elements*dtheta)-N_elements/2*dtheta/2;
 figure();
 gcf();
 hold on;
-if step_response == 0
-    plot([y_start y_los], [x_start x_los], 'g-x', 'LineWidth', 2);
-end
 plot(y, x, 'b', 'LineWidth', 2);
+if step_response == 0
+    plot([y_start y_los], [x_start x_los], 'g--x', 'LineWidth', 2);
+end
 plot(x_nodes,y_nodes, 'r','LineWidth',3)
 ylim([-2*50 2*50]);
 xlim([-2*50 5*50]);
 hold off;
 grid on;
 if step_response == 0
-    legend_name = {'Path', 'ROV', 'Fish farm'};
+    legend_name = {'ROV', 'Path', 'Fish farm'};
 else
     legend_name = {'ROV', 'Fish farm'};
 end
 legend(legend_name, 'FontSize', 14);
-title('The position of the ROV in NED', 'FontSize', 16);
+title('\textbf{The position of the ROV in NED}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('y-EAST [m]');
 ylabel('x-NORTH [m]');
+set(gca, 'FontSize', 14);
 
 figure();
 gcf();
@@ -108,10 +109,11 @@ plot(time, crosstrack_e, 'b', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-title('The crosstrack error', 'FontSize', 16);
+title('\textbf{The crosstrack error}', 'Interpreter', 'latex', 'FontSize', 16);
 legend('$e(t)$', 'Interpreter', 'latex', 'FontSize', 14);
 xlabel('time [s]');
 ylabel('error [m]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 figure();
 gcf();
@@ -120,10 +122,11 @@ plot(time, z, 'b', time, z_d, 'r--', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-title('The depth the ROV goes', 'FontSize', 16);
+title('\textbf{The depth of the ROV relative to NED}', 'Interpreter', 'latex', 'FontSize', 16);
 legend('$z$', '$z_d$', 'Interpreter', 'latex', 'FontSize', 14);
 xlabel('time [s]');
 ylabel('z [m]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 figure();
 gcf();
@@ -132,34 +135,36 @@ plot(time, rad2deg(psi), 'b', time, rad2deg(psi_d), 'r--', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-title('The angle of the ROV in NED', 'FontSize', 16);
+title('\textbf{The yaw angle of the ROV relative to NED}', 'Interpreter', 'latex', 'FontSize', 16);
 legend('$\psi$', '$\psi_d$', 'Interpreter', 'latex', 'FontSize', 14);
 xlabel('t [s]');
 ylabel('$\psi$ [deg]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 figure();
 gcf();
+subplot(2, 1, 1);
 hold on;
 plot(time, u, 'b', time, u_d, 'r--', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
 legend('$u$', '$u_d$' ,'Interpreter', 'latex', 'FontSize', 14);
-title('The velocity in x-direction of the ROV in NED', 'FontSize', 16);
+title('\textbf{The surge velocity of the ROV in body}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('u [m/s]');
-
-figure();
-gcf();
+set(gca, 'FontSize', 14);
+subplot(2, 1, 2);
 hold on;
 plot(time, v, 'b', time, v_d, 'r--', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
 legend('$v$','$v_d$' ,'Interpreter', 'latex', 'FontSize', 14);
-title('The velocity in y-direction of the ROV in NED', 'FontSize', 16);
+title('\textbf{The sway velocity of the ROV in body}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('v [m/s]');
+set(gca, 'FontSize', 14);
 
 figure();
 gcf();
@@ -170,10 +175,11 @@ plot(time, tau_u_sat, 'b', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-legend('$\tau_{u_{unsat}}$', '$\tau_u$', 'Interpreter' ,'latex');
-title('Controller input surge');
+legend('$\tau_{u_{unsat}}$', '$\tau_u$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{Control input surge}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_u$ [N]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 subplot(2, 2, 2);
 hold on;
@@ -182,10 +188,11 @@ plot(time, tau_v_sat, 'b', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-legend('$\tau_{v_{unsat}}$', '$\tau_v$', 'Interpreter' ,'latex');
-title('Controller input sway');
+legend('$\tau_{v_{unsat}}$', '$\tau_v$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('\textbf{Control input sway}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_v$ [N]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 subplot(2, 2, 3);
 hold on;
@@ -194,10 +201,11 @@ plot(time, tau_w_sat, 'b', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-legend('$\tau_{w_{unsat}}$', '$\tau_w$', 'Interpreter', 'latex');
-title('Controller input heave');
+legend('$\tau_{w_{unsat}}$', '$\tau_{w}$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{Control input heave}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_w$ [Nm]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 subplot(2, 2, 4);
 hold on;
@@ -206,10 +214,11 @@ plot(time, tau_r_sat, 'b', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-legend('$\tau_{r_{unsat}}$', '$\tau_r$', 'Interpreter' ,'latex');
-title('Controller input heading');
+legend('$\tau_{r_{unsat}}$', '$\tau_r$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{Control input heading}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$\tau_r$ [Nm]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 hold off;
 
 
@@ -222,10 +231,11 @@ plot(time, Vx, 'r--', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-legend('$\hat{V}_{x}$', '$V_x$', 'Interpreter' ,'latex');
-title('Current estimate in x-direction, surge');
+legend('$\hat{V}_{x}$', '$V_x$', 'Interpreter' ,'latex', 'FontSize', 14);
+title('\textbf{Current estimate of $\mathbf{u}$ relative to NED}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_x$ [m/s]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
 
 subplot(2, 1, 2);
 hold on;
@@ -234,7 +244,14 @@ plot(time, Vy, 'r--', 'LineWidth', 2);
 hold off;
 xlim([0 time(end)]);
 grid on;
-legend('$\hat{V}_{y}$', '$V_y$', 'Interpreter' ,'latex');
-title('Current estimate in y-direction, surge');
+legend('$\hat{V}_{y}$', '$V_y$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{Current estimate of $\mathbf{v}$ relative to NED}', 'Interpreter', 'latex', 'FontSize', 16);
 xlabel('t [s]');
 ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
+
+[N, m] = size(u);
+
+u_e = sumabs(u-u_d)/N
+v_e = sumabs(v-v_d)/N
+c_e = sumabs(crosstrack_e)/N

@@ -360,6 +360,6 @@ slprj/
 **/simulation_output/
 **/WakeEffect_MATLAB/
 
-#Figures
+# Figures
 *.eps
 *.mat

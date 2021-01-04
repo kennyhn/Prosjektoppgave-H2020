@@ -1,7 +1,9 @@
 clc; close all; clear
 %% Set scenario
-step_response   = 0; % 1 for step response 0 for guidance
-save_simulation = 0; % 1 for true 0 for false
+save_simulation     = 0; % 1 for true 0 for false
+step_response       = 1; % 1 for step response 0 for guidance
+nonlinear_damping   = 1; % 1 to turn on 0 to turn off
+coriolis_effect     = 1; % 1 to turn on 0 to turn off
 %% Create all constants
 constants
 
@@ -47,10 +49,10 @@ T_ref       = 0.2; % Desired time constant for first-order model
 
 %% Controller gains
 % Velocity controller gains
-pole_u  = 471.736111111;
+pole_u  = 6.736111111;
 k_p_u   = m_11*pole_u-d_11;
 k_i_u   = k_p_u/1000;
-pole_v  = 611.234567901;
+pole_v  = 6.234567901;
 k_p_v   = m_22*pole_v-d_22;
 k_i_v   = k_p_v/1000;
 
@@ -80,9 +82,9 @@ lambda      = 1;
 
 %% Simulation parameters
 if step_response == 1
-    t_sim = 1124; %s
+    t_sim = 1114; %s
 else
-    t_sim = 1010; %s
+    t_sim = 1020; %s
 end
 
 %% Run simulation
