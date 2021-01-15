@@ -1,7 +1,7 @@
 clc; close all; clear;
 %% Set scenario
 save_simulation     = 0; % 1 for true 0 for false
-step_response       = 1; % 1 for step response 0 for guidance
+step_response       = 0; % 1 for step response 0 for guidance
 nonlinear_damping   = 1; % 1 to turn on 0 to turn off
 coriolis_effect     = 1; % 1 to turn on 0 to turn off
 
