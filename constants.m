@@ -180,3 +180,24 @@ tau_u_max   = (F_max*cos(alpha1)+F_max*cos(alpha2)+F_max*cos(alpha3)+F_max*cos(a
 tau_v_max   = (F_max*sin(alpha1)-F_max*sin(alpha2)+F_max*sin(alpha3)-F_max*sin(alpha4)); % N
 tau_w_max   = 2*F_max; %N
 tau_r_max   = sqrt(torque_co'*torque_co);
+
+% Waypoint generator %%%% TBD %%%%
+N_nodes     = 16 + 1;
+D_net       = 50; % Diameter of the fish farm net
+diameter_path = D_net + 2^2; %2 m away from the actual fish farm net 
+dtheta      = 2*pi/(N_nodes-1);
+theta       = (pi:dtheta:pi+(N_nodes-1)*dtheta)-(N_nodes-1)/2*dtheta/2;
+[x_nodes, y_nodes] = pol2cart(theta, ones(1,N_nodes)*diameter_path/2);
+x_nodes = [x0 x_nodes];
+y_nodes = [y0 y_nodes];
+
+waypoints   = [x_nodes' y_nodes'];
+alpha_k     = zeros(10, 1);
+for i = 1:N_nodes
+   alpha_k(i) = atan2(waypoints(i+1, 2)-waypoints(i, 2), ...
+       waypoints(i+1, 1)-waypoints(i, 1));
+end
+alpha_k(N_nodes+1) = atan2(waypoints(N_nodes+1, 2)- waypoints(2, 2),...
+    waypoints(N_nodes+1, 1)-waypoints(2, 1));
+
+radius_lim = 1.5;

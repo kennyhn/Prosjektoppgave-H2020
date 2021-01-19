@@ -103,7 +103,7 @@ gcf();
 hold on;
 plot(y, x, 'b', 'LineWidth', 2);
 if step_response == 0
-    plot([y_start y_los], [x_start x_los], 'g--x', 'LineWidth', 2);
+    plot(waypoints(:, 2), waypoints(:, 1), 'g--x', 'LineWidth', 2);
 end
 plot(x_nodes,y_nodes, 'r','LineWidth',3)
 hold off;

@@ -2,9 +2,9 @@ clc; close all; clear;
 
 %% Set scenario
 save_simulation     = 0; % 1 for true 0 for false
-step_response       = 1; % 1 for step response 0 for guidance
-nonlinear_damping   = 1; % 1 to turn on 0 to turn off
-coriolis_effect     = 1; % 1 to turn on 0 to turn off
+step_response       = 0; % 1 for step response 0 for guidance
+nonlinear_damping   = 0; % 1 to turn on 0 to turn off
+coriolis_effect     = 0; % 1 to turn on 0 to turn off
 
 %% Create all constants
 constants
@@ -82,7 +82,7 @@ gamma2      = 35;
 if step_response == 1
     t_sim = 1122; %s
 else
-    t_sim = 1010; %s
+    t_sim = 1450; %s
 end
 
 %% Run simulation

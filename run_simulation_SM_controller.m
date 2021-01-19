@@ -82,7 +82,7 @@ lambda      = 1;
 if step_response == 1
     t_sim = 1122; %s
 else
-    t_sim = 1010; %s
+    t_sim = 1450; %s
 end
 
 %% Run simulation

@@ -80,7 +80,7 @@ gamma_r      = 2;
 if step_response == 1
     t_sim = 1122; %s
 else
-    t_sim = 1010; %s
+    t_sim = 1450; %s
 end
 %% Run simulation
 sim_output = sim('simulering_ROV_FL_controller.slx');
