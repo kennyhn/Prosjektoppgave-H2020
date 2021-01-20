@@ -1,27 +1,3 @@
-% Options
-use_saved_file = 0; % 1 for true 0 for false
-
-if use_saved_file == 1
-   clear; close all;
-   step_response  = 1; % 0 for guidance, 1 for step
-   filename   = 'simulation_output/dp_model/dp_model';
-   
-   if step_response == 0
-       % Guidance law parameters
-       Delta   = 25; % Lookahead distance
-       x_start = -2*50;
-       y_start = 1*80;
-       x_los   = 2*50;
-       y_los   = 1*80;
-
-       filename = strcat(filename, '_guidance.mat');
-   else  
-       filename = strcat(filename, '_step.mat');
-   end
-   
-   sim_output = load(filename).sim_output;
-end
-
 %% Parse out simulation results
 nu              = sim_output.nu.signals.values;
 eta             = sim_output.eta.signals.values;

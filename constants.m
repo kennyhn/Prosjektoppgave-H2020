@@ -137,8 +137,13 @@ B_aug       = [b11 b12 b13 b14 b15 b16;
             b61 b62 b63 b64 b65 b66];
 
 B_psinv_aug = B_aug'/(B_aug*B_aug');
-              
-% Initial states
+
+%% Disturbance
+V_x_mat = load('Vx_disturbance.mat').u;
+V_y_mat = load('Vy_disturbance.mat').v;
+g_z     = 0.91; % Restoring forces. Slightly buyoant
+
+
 %% Initial values
 % 4 DoF position in inertial frame
 x0      = -100; %m

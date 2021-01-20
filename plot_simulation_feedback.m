@@ -1,38 +1,3 @@
-% Options
-use_saved_file = 0; % 1 for true 0 for false
-
-
-if use_saved_file == 1
-   clear; close all
-   % options
-   controller     = 0; % 0 for FL, 1 for PID, 2 for SM
-   step_response  = 0; % 0 for guidance, 1 for step
-   filename   = 'simulation_output/';
-   
-   if controller == 0
-       filename = strcat(filename, 'FL_controller/FL_controller');
-   elseif controller == 1
-       filename = strcat(filename, 'PID_controller/PID_controller');
-   elseif controller == 2
-       filename = strcat(filename, 'SM_controller/SM_controller');
-   end
-   
-   if step_response == 0
-       % Guidance law parameters
-       Delta   = 25; % Lookahead distance
-       x_start = -2*50;
-       y_start = 1*80;
-       x_los   = 2*50;
-       y_los   = 1*80;
-
-       filename = strcat(filename, '_guidance.mat');
-   else  
-       filename = strcat(filename, '_step.mat');
-   end
-   
-   sim_output = load(filename).sim_output;
-end
-
 %% Parse out results from simulation
 nu              = sim_output.nu.signals.values;
 eta             = sim_output.eta.signals.values;
