@@ -2,6 +2,10 @@
 nu              = sim_output.nu.signals.values;
 eta             = sim_output.eta.signals.values;
 
+u_rel_vel       = sim_output.u_relative_vel.signals.values;
+v_rel_vel       = sim_output.v_relative_vel.signals.values;
+r_rel_vel       = sim_output.r_relative_vel.signals.values;
+
 tau_unsat       = sim_output.tau_unsat.signals.values;
 tau_sat         = sim_output.tau_sat.signals.values;
 
@@ -225,6 +229,43 @@ title('\textbf{Current estimate of $\mathbf{v}$ relative to NED}', 'Interpreter'
 xlabel('t [s]');
 ylabel('$V_y$ [m/s]', 'Interpreter', 'latex');
 set(gca, 'FontSize', 14);
+
+figure();
+gcf();
+subplot(3, 1, 1);
+hold on;
+plot(time, u_rel_vel, 'b', 'LineWidth', 2);
+hold off;
+xlim([0 time(end)]);
+grid on;
+legend('$u_r$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{The relative surge velocity of the ROV in body}', 'interpreter', 'latex', 'FontSize', 16);
+xlabel('t [s]');
+ylabel('$u_r$ [m/s]', 'Interpreter', 'latex');
+set(gca, 'FontSize', 14);
+subplot(3, 1, 2);
+hold on;
+plot(time, v_rel_vel, 'b', 'LineWidth', 2);
+hold off;
+xlim([0 time(end)]);
+grid on;
+legend('$v_r$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{The relative sway velocity of the ROV in body}', 'interpreter', 'latex', 'FontSize', 16);
+xlabel('t [s]');
+ylabel('v [m/s]');
+set(gca, 'FontSize', 14);
+subplot(3, 1, 3);
+hold on;
+plot(time, r_rel_vel , 'b', 'LineWidth', 2);
+hold off;
+xlim([0 time(end)]);
+grid on;
+legend('$r_r$', 'Interpreter', 'latex', 'FontSize', 14);
+title('\textbf{The relative heading angle of the ROV in body}', 'interpreter', 'latex', 'FontSize', 16);
+xlabel('t [s]');
+ylabel('r [m/s]');
+set(gca, 'FontSize', 14);
+
 
 [N, m] = size(u);
 

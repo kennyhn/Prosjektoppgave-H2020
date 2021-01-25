@@ -1,12 +1,12 @@
 clc; close all; clear;
 
 %% Set scenario
-save_simulation     = 1; % 1 for true 0 for false
+save_simulation     = 0; % 1 for true 0 for false
 use_saved_file      = 0; % 1 for true 0 for false
 step_response       = 0; % 1 for step response 0 for guidance
-nonlinear_damping   = 0; % 1 to turn on 0 to turn off
-coriolis_effect     = 0; % 1 to turn on 0 to turn off
-controller          = 3; % 0 for DP model, 1 for FL controller, 2 for PID, controller, 3 for SM controller, 4 for STA.
+nonlinear_damping   = 1; % 1 to turn on 0 to turn off
+coriolis_effect     = 1; % 1 to turn on 0 to turn off
+controller          = 0; % 0 for DP model, 1 for FL controller, 2 for PID, controller, 3 for SM controller, 4 for STA.
 %% Create all constants
 constants
 
@@ -53,10 +53,10 @@ else
         u_r     = 0.2; % m/s
         v_r     = 0; % m/s
     else
-        u_r     = 0.14; %m/s
-        v_r     = 0.14; %m/s
+        u_r     = 0;%0.14; %m/s
+        v_r     = 0.2;%0.14; %m/s
     end
-    psi_r   = deg2rad(-45);
+    psi_r   = deg2rad(-90);%-45);
     z_r     = 10; % m
 
     psi_r1      = 0; % deg
@@ -118,7 +118,6 @@ else
         else
             filename = strcat(filename, '_guidance.mat');
         end
+        save(filename, 'sim_output');
     end
-    save(filename, 'sim_output');
-    
 end

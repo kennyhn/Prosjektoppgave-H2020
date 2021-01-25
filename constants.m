@@ -113,6 +113,24 @@ b63     = l_x3*sin(alpha3)-l_y3*cos(alpha3);
 b64     = l_x4*sin(alpha4)-l_y4*cos(alpha4);
 b65     = 0;
 b66     = 0;
+
+% Linearization of damping for the ROV
+% Area should be adjusted depending on how large ur, vr and rr can become
+x_area_lin1      = (-0.35:0.0001:0.35)';
+x_area_lin2      = (-0.35:0.0001:0.35)';
+x_area_lin6      = (-0.4:0.0001:0.4)';
+y_area_lin_d1   = d_11*x_area_lin1+d_n11*abs(x_area_lin1).*x_area_lin1; % Surge
+y_area_lin_d2   = d_22*x_area_lin2+d_n22*abs(x_area_lin2).*x_area_lin2; % Sway
+y_area_lin_d6   = d_66*x_area_lin6+d_n66*abs(x_area_lin6).*x_area_lin6; % Yaw
+
+f               = fittype('a*x');
+[fit1, ~, ~]    = fit(x_area_lin1, y_area_lin_d1, f, 'StartPoint',[0]);
+[fit2, ~, ~]    = fit(x_area_lin2, y_area_lin_d2, f, 'StartPoint', [0]);
+[fit6, ~, ~]    = fit(x_area_lin6, y_area_lin_d6, f, 'StartPoint', [0]);
+
+d_lin11         = fit1.a; % Used in control plant model for DP
+d_lin22         = fit2.a; % Used in control plant model for DP
+d_lin66         = fit6.a; % Usd in control plant model for DP
 %% System matrices for model equation
 % Mass matrices
 M_RB    = diag([m_RB11 m_RB22 m_RB33 m_RB44 m_RB55 m_RB66]);
@@ -186,7 +204,7 @@ tau_v_max   = (F_max*sin(alpha1)-F_max*sin(alpha2)+F_max*sin(alpha3)-F_max*sin(a
 tau_w_max   = 2*F_max; %N
 tau_r_max   = sqrt(torque_co'*torque_co);
 
-% Waypoint generator %%%% TBD %%%%
+% Waypoint generator
 N_nodes     = 16 + 1;
 D_net       = 50; % Diameter of the fish farm net
 diameter_path = D_net + 2^2; %2 m away from the actual fish farm net 
