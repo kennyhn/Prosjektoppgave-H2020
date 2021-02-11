@@ -53,10 +53,10 @@ else
         u_r     = 0.2; % m/s
         v_r     = 0; % m/s
     else
-        u_r     = 0;%0.14; %m/s
-        v_r     = 0.2;%0.14; %m/s
+        u_r     = 0.14;%0.14; %m/s
+        v_r     = 0.14;%0.14; %m/s
     end
-    psi_r   = deg2rad(-90);%-45);
+    psi_r   = deg2rad(-45);
     z_r     = 10; % m
 
     psi_r1      = 0; % deg

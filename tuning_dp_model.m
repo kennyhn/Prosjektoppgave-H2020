@@ -1,5 +1,5 @@
 %% Controller options
-int_effect_psi      = 1; % Turn on/off integral effect in heading controller
+int_effect_psi      = 0; % Turn on/off integral effect in heading controller
 damping_estimation  = 1; % Turn on/off linear damping estimation on the controller or use linear values (assumed no nonlinear terms)
 
 %% Controller gains
