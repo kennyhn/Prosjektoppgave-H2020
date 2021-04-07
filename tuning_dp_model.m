@@ -1,6 +1,6 @@
 %% Controller options
 int_effect_psi      = 0; % Turn on/off integral effect in heading controller
-damping_estimation  = 1; % Turn on/off linear damping estimation on the controller or use linear values (assumed no nonlinear terms)
+damping_estimation  = 0; % Turn on/off linear damping estimation on the controller or use linear values (assumed no nonlinear terms)
 
 %% Controller gains
 % Velocity controller gains
@@ -28,8 +28,12 @@ k_d_psi         = 2*m_66*zeta_d_psi*wn_psi-d_66;
 k_i_psi         = wn_psi/10*k_p_psi;
 
 %% Adaptive controller gains
-gamma1          = 50;
-gamma2          = 35;
+gamma1          = 5;
+gamma2          = 3.5;
+
+gamma_e1        = 0.05;
+gamma_e2        = 0.05;
+gamma_e3        = 0.05;
 
 %% Run simulation
-sim_output = sim('simulering_ROV_DP_model.slx');
+%sim_output = sim('simulering_ROV_DP_model.slx');

@@ -3,10 +3,10 @@ clc; close all; clear;
 %% Set scenario
 save_simulation     = 0; % 1 for true 0 for false
 use_saved_file      = 0; % 1 for true 0 for false
-step_response       = 0; % 1 for step response 0 for guidance
-nonlinear_damping   = 1; % 1 to turn on 0 to turn off
+step_response       = 1; % 1 for step response 0 for guidance
+nonlinear_damping   = 0; % 1 to turn on 0 to turn off
 coriolis_effect     = 1; % 1 to turn on 0 to turn off
-controller          = 0; % 0 for DP model, 1 for FL controller, 2 for PID, controller, 3 for SM controller, 4 for STA.
+controller          = 5; % 0 for DP model, 1 for FL controller, 2 for PID, controller, 3 for SM controller, 4 for STA.
 %% Create all constants
 constants
 
@@ -26,6 +26,8 @@ if use_saved_file == 1
         filename = strcat(filename, 'SM_controller/SM_controller');
     elseif isequal(controller, 4)
         filename = strcat(filename, 'STA_controller/STA_controller');
+    elseif isequal(controller, 5)
+        filename = strcat(filename, 'dp_model2/dp_model2');
     end
    
     if step_response == 0
@@ -43,7 +45,8 @@ if use_saved_file == 1
 else
     % Simulation parameters
     if step_response == 1
-        t_sim = 1122; %s
+        %t_sim = 1122; %s
+        t_sim = 100; %s
     else
         t_sim = 1450; %s
     end
@@ -109,6 +112,12 @@ else
         tuning_STA_controller
         sim_output = sim('simulering_ROV_STA_controller.slx');
         plot_simulation_feedback
+    elseif isequal(controller, 5) % DP controller 2nd version
+        filename            = 'simulation_output/dp_model2/dp_model2';
+        
+        tuning_dp_model
+        sim_output = sim('simulering_ROV_DP_model2.slx');
+        plot_simulation_dp
     end
 
 
